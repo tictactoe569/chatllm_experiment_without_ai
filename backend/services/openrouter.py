@@ -20,6 +20,15 @@ _SYSTEM_PROMPT = (
 )
 
 
+'''
+def system_prompt():
+    _SYSTEM_PROMPT = ()
+
+'''
+
+def system_prompt():
+    
+
 def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
     messages: list[dict] = [{"role": "system", "content": _SYSTEM_PROMPT}]
     for item in history:
