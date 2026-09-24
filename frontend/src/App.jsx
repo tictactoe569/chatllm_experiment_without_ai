@@ -16,7 +16,8 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesRef = useRef(null);
   const abortControllerRef = useRef(null);
-
+  const [name, setName] = useState('');
+  
   const chatHistory = useMemo(
     () => messages.filter((msg) => msg.role === "user" || msg.role === "assistant"),
     [messages]
@@ -112,6 +113,22 @@ function App() {
     }
   };
 
+  const handleNewSystemPrompt = async () => {
+    try {
+      console.log(`OPAAAA`);
+    } catch (err) {
+      setError("Erro ao criar sessao");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log(`TESTEEE`);  
+    e.preventDefault();
+
+    console.log(`Form submitted, ${name}`);    
+
+  }
+
   const handleDeleteSession = async (sessionId) => {
     try {
       await deleteSession(sessionId);
@@ -157,6 +174,7 @@ function App() {
     setBusy(false);
   };
 
+  
   const onSubmit = async (event, inputRef) => {
     event.preventDefault();
     const cleaned = text.trim();
@@ -253,6 +271,8 @@ function App() {
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
         onDeleteSession={handleDeleteSession}
+        onNewSystemPrompt={handleNewSystemPrompt}
+        onSubmit={handleSubmit}
       />
 
       <main className="app-shell">

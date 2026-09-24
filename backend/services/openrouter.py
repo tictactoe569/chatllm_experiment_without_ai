@@ -12,6 +12,7 @@ class OpenRouterConfigError(RuntimeError):
 
 
 _SYSTEM_PROMPT = (
+    "Always answer the first message starting with the word Opa! "
     "Keep your answers short and concise. "
     "When writing mathematical expressions, use LaTeX notation: "
     r"\( ... \) for inline math and $$ ... $$ for display/block math. "

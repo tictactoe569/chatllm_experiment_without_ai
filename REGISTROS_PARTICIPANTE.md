@@ -29,3 +29,5 @@ Caso utilize este espaço, organize o conteúdo da maneira que preferir.
 ---
 
 Registros
+
+Vou começar a atividade fazendo as implementações visuais
