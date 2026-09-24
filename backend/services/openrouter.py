@@ -5,19 +5,14 @@ import json
 import httpx
 
 from backend.config import OPENROUTER_API_KEY, OPENROUTER_API_URL, OPENROUTER_MODEL_DEFAULT
+from backend.models import ChatMessage
 
 
 class OpenRouterConfigError(RuntimeError):
     pass
 
 
-_SYSTEM_PROMPT = (
-    "Keep your answers short and concise. "
-    "When writing mathematical expressions, use LaTeX notation: "
-    r"\( ... \) for inline math and $$ ... $$ for display/block math. "
-    "When writing currency values (e.g. dollar amounts), always escape the dollar sign as the HTML entity &#36; "
-    "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
-)
+_SYSTEM_PROMPT = ChatMessage.system_prompt
 
 
 def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
