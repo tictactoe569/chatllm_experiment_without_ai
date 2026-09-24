@@ -29,3 +29,8 @@ Caso utilize este espaço, organize o conteúdo da maneira que preferir.
 ---
 
 Registros
+
+1- Tornar a variavel _SYSTEM_PROMPT do openrouter.py editavel para o usuario através de um input de modal 
+2- Alterar models para criar nova coluna na tabela chat_messages para salvar o system prompt
+3- Criar modal de salvamento do system prompt
+4- Criar logica de salvamento no banco 

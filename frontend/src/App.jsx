@@ -11,6 +11,7 @@ function App() {
   const [activeSessionId, setActiveSessionId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
+  const [prompt, setPrompt] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -275,6 +276,12 @@ function App() {
 
         <section className="messages" aria-live="polite" ref={messagesRef}>
           <div className="messages-inner">
+            <SystemPromptModal
+              text={prompt}
+              busy={busy}
+              onChangeText={setPrompt}
+              onSubmit={onSubmit}
+            />
             {messages.map((msg) => (
               <article key={msg.id} className={`bubble ${msg.role}`}>
                 <MessageContent content={msg.content} />

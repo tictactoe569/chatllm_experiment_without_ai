@@ -7,6 +7,13 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from backend.database import Base
 
+_SYSTEM_PROMPT = (
+    "Keep your answers short and concise. "
+    "When writing mathematical expressions, use LaTeX notation: "
+    r"\( ... \) for inline math and $$ ... $$ for display/block math. "
+    "When writing currency values (e.g. dollar amounts), always escape the dollar sign as the HTML entity &#36; "
+    "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
+)
 
 class User(Base):
     __tablename__ = "users"
@@ -53,6 +60,7 @@ class ChatMessage(Base):
     session_id: Mapped[int] = mapped_column(Integer, ForeignKey("chat_sessions.id"), index=True, nullable=False)
     user_id: Mapped[int] = mapped_column(Integer, ForeignKey("users.id"), index=True, nullable=False)
     role: Mapped[str] = mapped_column(String(20), index=True)
+    system_prompt: Mapped[str] = mapped_column(String(8000), default=_SYSTEM_PROMPT)
     content: Mapped[str] = mapped_column(Text)
     model: Mapped[str] = mapped_column(String(120), default="google/gemma-4-31b-it")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None), index=True)
