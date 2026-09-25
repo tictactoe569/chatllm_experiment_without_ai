@@ -1,31 +1,5 @@
 # Registros do Participante
 
-Este arquivo é um espaço opcional e de uso livre durante a atividade.
+Minhea ideia era implementar um botão que abrisse um modal com um campo de input no qual o usuário digitaria sua nova Custom Instruction, que seria então enviada e salva pelo sistema.
 
-Você pode utilizá-lo da forma que considerar mais útil para o seu trabalho. Por exemplo, ele pode servir como:
-
-documentação própria da solução;
-
-- anotações;
-
-- refatorações;
-
-- rascunhos;
-
-- observações;
-
-- lembretes;
-
-- listas ou checklists;
-
-- referências;
-
-qualquer outro registro que você considere útil durante a implementação.
-
-Não existe um formato esperado, nem é necessário preencher este arquivo para concluir a atividade.
-
-Caso utilize este espaço, organize o conteúdo da maneira que preferir.
-
----
-
-Registros
+Meu desenvolvimento da solução foi prejudicado, ao ponto do impedimento, pela minha falta de conhecimento da stack da aplicação, principalmente o REACT
