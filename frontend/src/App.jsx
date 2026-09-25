@@ -265,6 +265,7 @@ function App() {
                 <line x1="3" y1="14" x2="15" y2="14" />
               </svg>
             </button>
+            
             <div className="brand">ChatLLM Lab</div>
           </div>
           <div className="header-right">

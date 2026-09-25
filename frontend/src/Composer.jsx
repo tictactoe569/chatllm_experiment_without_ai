@@ -31,6 +31,15 @@ function Composer({ text, busy, error, onChangeText, onSubmit, onStop }) {
           disabled={busy}
           autoFocus
         />
+        <input
+          ref={inputRef}
+          value={text}
+          onChange={(event) => onChangeText(event.target.value)}
+          placeholder="Mensagem para ChatLLM Lab"
+          maxLength={8000}
+          disabled={busy}
+          autoFocus
+        />
         <button
           type={busy ? "button" : "submit"}
           onClick={busy ? handleStop : undefined}

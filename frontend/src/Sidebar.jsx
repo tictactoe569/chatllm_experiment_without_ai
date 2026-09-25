@@ -11,6 +11,10 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
           </svg>
           Novo chat
         </button>
+        <br></br>
+        <button className="new-chat-btn" onClick = {() => alert("Aqui seria o input da nova system instruction")}>
+          Custom Instructions
+        </button>
       </div>
       <div className="sidebar-list">
         {sessions.map((s) => (
