@@ -11,13 +11,19 @@ class OpenRouterConfigError(RuntimeError):
     pass
 
 
-_SYSTEM_PROMPT = (
+_SYSTEM_PROMPT = ()
+
+_SYSTEM_PROMPT_DEFAULT = (
     "Keep your answers short and concise. "
     "When writing mathematical expressions, use LaTeX notation: "
     r"\( ... \) for inline math and $$ ... $$ for display/block math. "
     "When writing currency values (e.g. dollar amounts), always escape the dollar sign as the HTML entity &#36; "
     "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
 )
+
+async def sysPrompt():
+    '''adicionar logica de importacao de prompt e caso nao receba nada retornar o systempromptdefault para o systemprompt, com autenticacao'''
+
 
 
 def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:

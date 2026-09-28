@@ -1,6 +1,6 @@
 const { useEffect, useState } = React;
 
-function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession }) {
+function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onNewInstruction }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
@@ -32,6 +32,10 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
             </button>
           </div>
         ))}
+          <button className="inst-btn" onClick={onNewSession}>
+          Incluir Instruções ao Chat
+        </button>
+        
       </div>
     </aside>
   );

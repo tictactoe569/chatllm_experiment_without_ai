@@ -112,6 +112,15 @@ function App() {
     }
   };
 
+  const handleNewInstruction = async () => {
+    try {
+      await createInstruction();
+    } catch (err) {
+      setError("Erro ao criar instrucao");
+    }
+  };
+
+
   const handleDeleteSession = async (sessionId) => {
     try {
       await deleteSession(sessionId);
@@ -253,6 +262,7 @@ function App() {
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
         onDeleteSession={handleDeleteSession}
+        onNewInstruction={handleNewInstruction}
       />
 
       <main className="app-shell">
