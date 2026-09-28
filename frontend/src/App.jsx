@@ -1,3 +1,5 @@
+//EU PREENCHI O RESTANTE DA MINHA SOLUCAO EM REGISTROS_PARTICIPANTES!
+
 const { useEffect, useMemo, useRef, useState, useCallback } = React;
 
 function createMessageId() {
@@ -151,6 +153,10 @@ function App() {
     setError("");
   };
 
+  const handleSetInstruction = async (sessionId) => {
+    
+  };
+
   const onStop = () => {
     abortControllerRef.current?.abort();
     abortControllerRef.current = null;
@@ -251,6 +257,7 @@ function App() {
         sessions={sessions}
         activeSessionId={activeSessionId}
         onSelectSession={handleSelectSession}
+        onSetInstruction={handleSetInstruction}
         onNewSession={handleNewSession}
         onDeleteSession={handleDeleteSession}
       />
