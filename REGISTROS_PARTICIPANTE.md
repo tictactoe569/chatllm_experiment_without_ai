@@ -126,3 +126,11 @@ OpenRouter supports asking models to complete a partial response. This can be us
 To use this features, simply include a message with role: "assistant" at the end of your messages array.
 
 Recommendation Systems: Generate embeddings for items (products, articles, movies) and user preferences to recommend similar items. By comparing embedding vectors, you can find items that are semantically related even if they don’t share obvious keywords.
+
+Realmente, acho que tem algumas variaveis que possa usar que a propria API me dá. Infelizmente não sei usar elas e teria que passar um empo para estudar melhor. 
+
+No entanto, o que eu faria nessa tarefa, porém não conseguirei por falta de conhecimento das tecnologias somada a falta de tempo para aprende-las assim, eu testaria os testes, comecaria pensando no banco de dados, esquema e modelo que implementaria, partiria para o front end, criando o botão e o formulario. Uma vez que esse formulario iniciasse com o padrao e o usuario pudesse mudar e isso fosse linkado ao banco de dados, mexeria na API, seja  passando esse contexto junto da mensagem (de forma invisivel para o usuario), seja passando por algum parametro para a propria API. 
+
+Pensei na maneira 1 por falta de conecimento sobre a API, mas acredito que dessa forma, consumiria muitos tokens e ficaria repetitivo, por isso chuto que a API  deva dar suporte a essa feature de outra forma. 
+
+De qualquer jeito, acredito que de para fazer essa implementação rapidamente, uma vez que o codigo está bem encapsulado e me parece que tem uma logica solida, de forma que as aldições para essa feature nao tragam modifcacoes ou refatorações grandes no codigo já existente. 
