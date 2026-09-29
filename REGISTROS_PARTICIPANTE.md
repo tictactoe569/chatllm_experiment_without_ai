@@ -101,4 +101,28 @@ Gostaria muito de ter um tempo para ler sobre, porque sinto que talvez seja mais
 
 Vi pelo f12 alguns erros de referencias das minhas modificacoes. O lado bom é que testei e o site nao quebrou e nem aponta erros em partes que eu não mexi. O erro é uma referencia nao localizada a getPreferences... o que faz sentido, visto que não a implementei. Vou tentar implementa-la tal qual o auth.jsx e tals.... Me parece ue deve ser assim, uma vez que quero reornar um formulario... 
 
-Acho que consegui algo mas como eu passo essa funcao?
+Acho que consegui algo mas como eu passo essa funcao? E nao entendi porque meu App.jsx nao coegue ver meu prefences.... 
+
+Pularei isso pelo tempo... como não é necessário que tudo funcione mas é necessario que entendam mina linha de raciocinio vou deixar passar isso. 
+
+Voltando o plano original era ter um painel que abria quando o usuario clicasse ness btn que implementei. Ele veria uma mensagem padrao de contexto e poderia muda-la. A ideia era que o chat no inicio dele, recebesse essa preferencia como contexto (eu juntaria ela junto da primeira mensagem ou algo do tipo). Analisando o codigo, tenho a impressao de que existem foras de setar essas prrferencias pela propria api. Acho que pesquisarei um pouco, pois sinto que talvez tenham cioisas essenciais que não sei. Gostaria de ter mais conhecimento sobre antes de prosseguir. 
+
+https://openrouter.ai/docs/api_reference/parameters:
+
+Response Format
+Key: response_format
+Optional, map
+Forces the model to produce specific output format. Setting to { "type": "json_object" } enables JSON mode, which guarantees the message the model generates is valid JSON.
+Note: when using JSON mode, you should also instruct the model to produce JSON yourself via a system or user message.
+​
+Structured Outputs
+Key: structured_outputs
+Optional, boolean
+If the model can return structured outputs using response_format json_schema.
+​
+
+Assistant prefill
+OpenRouter supports asking models to complete a partial response. This can be useful for guiding models to respond in a certain way.
+To use this features, simply include a message with role: "assistant" at the end of your messages array.
+
+Recommendation Systems: Generate embeddings for items (products, articles, movies) and user preferences to recommend similar items. By comparing embedding vectors, you can find items that are semantically related even if they don’t share obvious keywords.
