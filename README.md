@@ -55,6 +55,7 @@ O arquivo `.env` e extraido pelo script de setup a partir de um arquivo protegid
 
 Hoje o system prompt e fixo no codigo. Voce deve permitir que **cada usuario edite as suas proprias instrucoes personalizadas** (o system prompt), de forma parecida com o recurso "Custom Instructions" do ChatGPT.
 
+
 ### Requisitos minimos
 
 1. **Persistencia por usuario:** as instrucoes personalizadas devem ser salvas no banco de dados SQLite e associadas ao usuario autenticado.

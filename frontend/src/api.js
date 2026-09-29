@@ -100,3 +100,27 @@ async function getSessionMessages(sessionId) {
 async function deleteSession(sessionId) {
   await apiFetch(`/api/sessions/${sessionId}`, { method: "DELETE" });
 }
+
+
+async function getMyInstructions() {
+  const resp = await apiFetch(`/api/me/instructions`, {
+    headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+  });
+
+  return await resp.json();
+}
+
+
+async function saveMyInstructions(instructions) {
+  const resp = await apiFetch(`/api/me/instructions`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+    body: JSON.stringify({ instructions })
+  });;
+
+  
+  if (!resp.ok) {
+    throw new Error("Erro ao salvar instruções");
+  }
+  return await resp.json();
+}

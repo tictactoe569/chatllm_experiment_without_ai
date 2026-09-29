@@ -7,6 +7,7 @@ function createMessageId() {
 function App() {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
   const [userEmail, setUserEmail] = useState(localStorage.getItem("user_email") || "");
+  const [instructionsOpen, setInstructionsOpen]= useState(false);
   const [sessions, setSessions] = useState([]);
   const [activeSessionId, setActiveSessionId] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -255,6 +256,8 @@ function App() {
         onDeleteSession={handleDeleteSession}
       />
 
+      
+
       <main className="app-shell">
         <header className="app-header">
           <div className="header-left">
@@ -270,6 +273,7 @@ function App() {
           <div className="header-right">
             <span className="user-email">{userEmail}</span>
             <button className="logout-btn" onClick={handleLogout}>Sair</button>
+            <button className="logout-btn" onClick={()=> setInstructionsOpen(true)}>Instruções</button>
           </div>
         </header>
 
@@ -291,7 +295,16 @@ function App() {
           onSubmit={onSubmit}
           onStop={onStop}
         />
+        
+
       </main>
+
+      <Instructions
+        open={instructionsOpen}
+        onClose={()=> setInstructionsOpen(false)}
+      />
+
+      
     </div>
   );
 }

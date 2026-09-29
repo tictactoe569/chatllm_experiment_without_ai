@@ -23,7 +23,13 @@ from backend.schemas.auth import (
 )
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
-
+DEFAULT_SYSTEM_PROMPT = (
+    "Keep your answers short and concise. "
+    "When writing mathematical expressions, use LaTeX notation: "
+    r"\( ... \) for inline math and $$ ... $$ for display/block math. "
+    "When writing currency values (e.g. dollar amounts), always escape the dollar sign as the HTML entity &#36; "
+    "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
+)
 
 @router.post("/signup", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
 def signup(payload: SignupRequest, db: Session = Depends(get_db)):
@@ -37,6 +43,7 @@ def signup(payload: SignupRequest, db: Session = Depends(get_db)):
     user = User(
         email=payload.email,
         hashed_password=hash_password(payload.password),
+        instructions= DEFAULT_SYSTEM_PROMPT,
     )
     db.add(user)
     db.commit()

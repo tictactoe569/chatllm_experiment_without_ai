@@ -226,6 +226,37 @@
         background: var(--user-bubble);
       }
 
+      .instructions-backdrop{
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      
+      .instructions-modal{
+        width: min(600px, 90vw);
+        background:white;
+        padding: 24px;
+        border-radius: 10px;
+      }
+
+      .instructions-modal textarea{
+        width: 100%;
+        box-sizing: border-box;
+        resize: vertical;
+      }
+
+      .instructions-actions{
+        display: flex;
+        justify-content: flex-end;
+        gap:8px;
+        margin-top: 12px;
+      }
+
+
       /* --- Auth styles --- */
       .auth-shell {
         width: 100%;
@@ -527,6 +558,7 @@
     <script type="text/babel" src="/frontend/src/Auth.jsx"></script>
     <script type="text/babel" src="/frontend/src/MessageContent.jsx"></script>
     <script type="text/babel" src="/frontend/src/Composer.jsx"></script>
+    <script type="text/babel" src="/frontend/src/Instructions.jsx"></script>
     <script type="text/babel" src="/frontend/src/Sidebar.jsx"></script>
     <script type="text/babel" src="/frontend/src/App.jsx"></script>
   </body>

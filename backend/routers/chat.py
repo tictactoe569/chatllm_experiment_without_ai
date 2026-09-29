@@ -85,6 +85,7 @@ async def chat(
             user_message=payload.message,
             history=[item.model_dump() for item in payload.history],
             model=payload.model,
+            user_instructions= current_user.instructions,
         )
     except OpenRouterConfigError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
@@ -137,6 +138,7 @@ async def chat_stream(
                 user_message=payload.message,
                 history=[item.model_dump() for item in payload.history],
                 model=payload.model,
+                user_instructions= current_user.instructions,
             ):
                 full_reply += delta
                 yield f"data: {json.dumps({'delta': delta}, ensure_ascii=True)}\n\n"
