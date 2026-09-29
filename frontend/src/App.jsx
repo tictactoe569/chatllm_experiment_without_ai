@@ -112,6 +112,14 @@ function App() {
     }
   };
 
+  const handleCustom = async () => {
+    try{
+      
+    } catch(err) {
+      setError("Erro")
+    }
+  }
+
   const handleDeleteSession = async (sessionId) => {
     try {
       await deleteSession(sessionId);
@@ -270,6 +278,7 @@ function App() {
           <div className="header-right">
             <span className="user-email">{userEmail}</span>
             <button className="logout-btn" onClick={handleLogout}>Sair</button>
+            <button className="custom-instructions" onClick={handleCustom}>Instruções customizadas</button>
           </div>
         </header>
 

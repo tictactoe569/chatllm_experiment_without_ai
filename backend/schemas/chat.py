@@ -22,3 +22,6 @@ class ChatResponse(BaseModel):
     model: str
     session_id: int | None = None
     title: str | None = None
+
+class CustomResponse(BaseModel):
+    content: str = Field(max_length=8000)

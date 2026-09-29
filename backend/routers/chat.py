@@ -166,3 +166,39 @@ async def chat_stream(
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "Connection": "keep-alive"},
     )
+
+@router.post("/api/custom", response_model=ChatResponse)
+async def chat(
+    payload: ChatRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> ChatResponse:
+    session = _ensure_session(payload.session_id, current_user, db)
+    session_id = session.id
+    current_user_id = current_user.id
+
+    try:
+        reply, model_name = await generate_reply(
+            user_message=payload.message,
+            history=[item.model_dump() for item in payload.history],
+            model=payload.model,
+            custom=current_user.custom_instructions
+        )
+    except OpenRouterConfigError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    resolved_model = payload.model or model_name or OPENROUTER_MODEL_DEFAULT
+
+    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="user", content=payload.message, model=resolved_model))
+    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="assistant", content=reply, model=resolved_model))
+
+    # Auto-title on first message
+    if session.title == "Novo chat" or not session.title:
+        await _generate_title(payload.message, db, session)
+
+    session.updated_at = datetime.now(timezone.utc).replace(tzinfo=None)
+    db.commit()
+
+    return ChatResponse(reply=reply, model=resolved_model, session_id=session_id, title=session.title)
