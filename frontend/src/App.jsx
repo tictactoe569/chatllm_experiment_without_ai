@@ -130,7 +130,7 @@ function App() {
   };
 
   const handleChangePreferences = async () => {
-    const newPopUp = await getPreferences();
+    <GetPreferences></GetPreferences>
   };
 
   const handleSelectSession = async (sessionId) => {

@@ -134,3 +134,13 @@ No entanto, o que eu faria nessa tarefa, porém não conseguirei por falta de co
 Pensei na maneira 1 por falta de conecimento sobre a API, mas acredito que dessa forma, consumiria muitos tokens e ficaria repetitivo, por isso chuto que a API  deva dar suporte a essa feature de outra forma. 
 
 De qualquer jeito, acredito que de para fazer essa implementação rapidamente, uma vez que o codigo está bem encapsulado e me parece que tem uma logica solida, de forma que as aldições para essa feature nao tragam modifcacoes ou refatorações grandes no codigo já existente. 
+
+
+Talvez a logica dogetpreferences seja mais parecida com  a do Composer
+
+
+  const handleChangePreferences = async () => {
+    <GetPreferences></GetPreferences>
+  };
+
+Mesmo assim, ainda nao consegui linkar. Realmente não vai dar tempo de apender tudo que preciso para implementar. Porém, acredito que com tempo e um pouco mais de conhecimento sobre API e js, dê para fazer esse passo a passo de maneira simples e modificando pouco o codigo. Chuto dizer que nem deve ser preciso modificar os testes existentes, apenas adicionar novos, que contemplem as novas funcionalidades. 
