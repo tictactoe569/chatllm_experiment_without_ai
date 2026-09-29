@@ -130,7 +130,7 @@ function App() {
   };
 
   const handleChangePreferences = async () => {
-    print("oi");
+    const newPopUp = await getPreferences();
   };
 
   const handleSelectSession = async (sessionId) => {

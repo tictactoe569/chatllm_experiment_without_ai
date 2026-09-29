@@ -86,3 +86,19 @@ Antes fui ver o front. vou usar a estrutura do btn novo chat para o btn de prefe
 O btn foi criado mas qnd eu clico nele abre a impressora... em jsx o print nao é o console.log.... 
 
 
+Ok, agora vou criar entao esse painel para abrir com uma caixinha de texto e poder botar minha mensagem. 
+
+const newPopUp = await getPreferences();
+
+
+Em teoria isso deve chamar uma funcao getPreferences que seria parecida com a ideia da createSession, mas que abriria uma tela para colocar as preferencias. Saindo do App.jsx e indo para api.js (seguindo +- o fluxo do createSession).
+Nao sei se é ali que devo por... me parece que essa parte é front e ao parte que mexe com a api ainda. Mexendo no codigo vi que nao coloquei no models a especificacao do meu schema.
+
+Pesquisei um pouco... talvez nao precise passar essas preferencias no codigo, mas ser um atributo do modelo tal qual model ou  content.
+
+Gostaria muito de ter um tempo para ler sobre, porque sinto que talvez seja mais facil e mais natural do que minha ideia inicial. Talvez a API já esteja pronta para receber essas preferencias e eu nao precise mandar elas como contexto no inicio de cada novo chat como eu estava imaginando. 
+
+
+Vi pelo f12 alguns erros de referencias das minhas modificacoes. O lado bom é que testei e o site nao quebrou e nem aponta erros em partes que eu não mexi. O erro é uma referencia nao localizada a getPreferences... o que faz sentido, visto que não a implementei. Vou tentar implementa-la tal qual o auth.jsx e tals.... Me parece ue deve ser assim, uma vez que quero reornar um formulario... 
+
+Acho que consegui algo mas como eu passo essa funcao?
