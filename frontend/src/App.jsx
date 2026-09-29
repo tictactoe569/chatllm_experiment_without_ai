@@ -129,6 +129,10 @@ function App() {
     }
   };
 
+  const handleChangePreferences = async () => {
+    print("oi");
+  };
+
   const handleSelectSession = async (sessionId) => {
     if (sessionId === activeSessionId) return;
     selectSession(sessionId);
@@ -253,6 +257,7 @@ function App() {
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
         onDeleteSession={handleDeleteSession}
+        OnChangePreferences={handleChangePreferences}
       />
 
       <main className="app-shell">

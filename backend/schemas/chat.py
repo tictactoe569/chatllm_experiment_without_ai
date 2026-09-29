@@ -22,3 +22,7 @@ class ChatResponse(BaseModel):
     model: str
     session_id: int | None = None
     title: str | None = None
+
+
+class ChatPreference(BaseModel):
+    preferences: str = Field(min_length=1, max_length=8000)
