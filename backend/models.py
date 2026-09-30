@@ -17,6 +17,7 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None)
     )
+    #custom_settings = Mapped[str] = mapped_column(String(255), unique=False, index=False, nullable=True)
 
 
 class TokenBlacklist(Base):
@@ -58,3 +59,4 @@ class ChatMessage(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None), index=True)
 
     session = relationship("ChatSession", backref="messages")
+    #custom_instructions = 
