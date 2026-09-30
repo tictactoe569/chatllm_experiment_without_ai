@@ -2,16 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from starlette.middleware.base import BaseHTTPMiddleware
-from fastapi import FastAPI
-from fastapi import HTTPException
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from backend.database import Base, engine
 from backend.routers.auth import router as auth_router
 from backend.routers.chat import router as chat_router
+from backend.routers.custom_instructions import router as custom_instructions_router
 from backend.routers.sessions import router as sessions_router
 
 
@@ -42,6 +42,7 @@ app.add_middleware(NoCacheMiddleware)
 app.include_router(auth_router)
 app.include_router(chat_router)
 app.include_router(sessions_router)
+app.include_router(custom_instructions_router)
 
 NO_CACHE_HEADERS = {
     "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -53,7 +54,11 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = ROOT_DIR / "frontend"
 
 if FRONTEND_DIR.exists():
-    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
+    app.mount(
+        "/frontend",
+        StaticFiles(directory=FRONTEND_DIR),
+        name="frontend",
+    )
 
 
 @app.get("/health")
@@ -65,5 +70,8 @@ def health_check() -> dict[str, str]:
 def root() -> FileResponse:
     index_path = FRONTEND_DIR / "index.html"
     if not index_path.exists():
-        raise HTTPException(status_code=404, detail="frontend/index.html nao encontrado")
+        raise HTTPException(
+            status_code=404,
+            detail="frontend/index.html nao encontrado",
+        )
     return FileResponse(index_path, headers=NO_CACHE_HEADERS)
