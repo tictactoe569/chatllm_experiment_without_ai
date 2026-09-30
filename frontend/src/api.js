@@ -9,26 +9,42 @@ function getAuthHeaders() {
 async function apiFetch(url, options = {}) {
   const response = await fetch(`${API_BASE}${url}`, {
     ...options,
-    headers: { "Content-Type": "application/json", ...getAuthHeaders(), ...options.headers },
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeaders(),
+      ...options.headers,
+    },
   });
+
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
     throw new Error(body.detail || `Erro ${response.status}`);
   }
+
   return response;
 }
 
-async function sendMessageStream({ message, history, session_id, onDelta, signal }) {
+async function sendMessageStream({
+  message,
+  history,
+  session_id,
+  onDelta,
+  signal,
+}) {
   const response = await fetch(`${API_BASE}/api/chat/stream`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+    headers: {
+      "Content-Type": "application/json",
+      ...getAuthHeaders(),
+    },
     body: JSON.stringify({ message, history, session_id }),
     signal,
   });
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    const detail = body?.detail || "Erro ao enviar mensagem para o servidor.";
+    const detail =
+      body?.detail || "Erro ao enviar mensagem para o servidor.";
     throw new Error(detail);
   }
 
@@ -52,6 +68,7 @@ async function sendMessageStream({ message, history, session_id, onDelta, signal
       const line = rawEvent
         .split("\n")
         .find((part) => part.startsWith("data:"));
+
       if (!line) continue;
 
       const payloadText = line.slice(5).trim();
@@ -72,15 +89,16 @@ async function sendMessageStream({ message, history, session_id, onDelta, signal
         onDelta(payload.delta);
       }
 
-      // Return session_id and title when done
       if (payload.done) {
-        return { session_id: payload.session_id, title: payload.title };
+        return {
+          session_id: payload.session_id,
+          title: payload.title,
+        };
       }
     }
   }
 }
 
-// Session API functions
 async function listSessions() {
   const resp = await apiFetch("/api/sessions");
   const data = await resp.json();
@@ -88,7 +106,10 @@ async function listSessions() {
 }
 
 async function createSession() {
-  const resp = await apiFetch("/api/sessions", { method: "POST", body: JSON.stringify({}) });
+  const resp = await apiFetch("/api/sessions", {
+    method: "POST",
+    body: JSON.stringify({}),
+  });
   return await resp.json();
 }
 
@@ -98,5 +119,20 @@ async function getSessionMessages(sessionId) {
 }
 
 async function deleteSession(sessionId) {
-  await apiFetch(`/api/sessions/${sessionId}`, { method: "DELETE" });
+  await apiFetch(`/api/sessions/${sessionId}`, {
+    method: "DELETE",
+  });
+}
+
+async function getCustomInstructions() {
+  const resp = await apiFetch("/api/custom-instructions");
+  return await resp.json();
+}
+
+async function saveCustomInstructions(content) {
+  const resp = await apiFetch("/api/custom-instructions", {
+    method: "PUT",
+    body: JSON.stringify({ content }),
+  });
+  return await resp.json();
 }
