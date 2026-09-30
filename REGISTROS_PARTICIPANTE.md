@@ -47,9 +47,11 @@ python -m uvicorn backend.main:app --reload
 
 Abra `http://127.0.0.1:8000`.
 
-## Teste manual
+## Teste manual (teórico)
 
-1. Cadastre o usuário A.
+1. Cadastre o usuário A. **
+É importante destacar que tive muitos problemas em relação a criar o usuário. parece ser um problema do próprio sql
+
 2. Abra **Instruções**.
 3. Salve: `Responda sempre começando com "DIÓGENES:"`.
 4. Envie uma mensagem.
