@@ -8,6 +8,9 @@ documentação própria da solução;
 
 - anotações;
 
+    Estou tentando entender e criar uma documentação mínima do código antes de implementar algo;
+    Não estou conseguindo realizar implementar o que foi pedido e nem criar cadastro/login na aplicação.
+
 - refatorações;
 
 - rascunhos;

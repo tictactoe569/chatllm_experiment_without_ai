@@ -53,7 +53,7 @@ def decode_access_token(token: str) -> dict:
         )
 
 
-def get_current_user(
+def get_current_user( #importante para fazer a autenticação do usuário --não deixar que outros users vejam o prompt de outro
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
     db: Session = Depends(get_db),
 ) -> User:

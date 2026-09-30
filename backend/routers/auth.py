@@ -26,7 +26,7 @@ router = APIRouter(prefix="/api/auth", tags=["auth"])
 
 
 @router.post("/signup", response_model=AuthResponse, status_code=status.HTTP_201_CREATED)
-def signup(payload: SignupRequest, db: Session = Depends(get_db)):
+def signup(payload: SignupRequest, db: Session = Depends(get_db)): # não está funcionando na prática
     existing = db.query(User).filter(User.email == payload.email).first()
     if existing:
         raise HTTPException(
@@ -61,7 +61,7 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
 
 @router.post("/logout", response_model=MessageResponse)
 def logout(
-    payload: LogoutRequest | None = None,
+    payload: LogoutRequest | None = None, 
     credentials: HTTPAuthorizationCredentials | None = Depends(security),
     db: Session = Depends(get_db),
 ):
