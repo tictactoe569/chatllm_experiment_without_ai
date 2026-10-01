@@ -1,6 +1,6 @@
 const { useEffect, useState } = React;
 
-function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession }) {
+function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, onUpdateSysPrompt }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
@@ -11,7 +11,11 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
           </svg>
           Novo chat
         </button>
+        <label>
+        System Prompt: <input id="1" name="SP" onKeyDown={e => {if (e.key === "Enter") {onUpdateSysPrompt(document.getElementById("1").value)}}} />
+      </label>
       </div>
+      
       <div className="sidebar-list">
         {sessions.map((s) => (
           <div

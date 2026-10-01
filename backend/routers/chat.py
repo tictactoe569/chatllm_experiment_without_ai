@@ -13,11 +13,15 @@ from backend.config import OPENROUTER_MODEL_DEFAULT
 from backend.database import get_db
 from backend.models import ChatMessage, ChatSession, User
 from backend.schemas.chat import ChatRequest, ChatResponse
-from backend.services.openrouter import OpenRouterConfigError, generate_reply, stream_reply
+from backend.services.openrouter import OpenRouterConfigError, generate_reply, stream_reply, setSysPrompt
 
 
 router = APIRouter(dependencies=[Depends(get_current_user)])
 
+@router.get("/api/chat/newSysPrompt/{newSysPrompt}")
+async def _update_SysPrompt(newSysPrompt: str):
+    setSysPrompt(newSysPrompt)
+    
 
 def _ensure_session(session_id: int | None, current_user: User, db: Session) -> ChatSession:
     """Return existing session or create a new one."""

@@ -19,6 +19,9 @@ _SYSTEM_PROMPT = (
     "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
 )
 
+def setSysPrompt(newSysPrompt: str):
+    _SYSTEM_PROMPT = newSysPrompt
+
 
 def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
     messages: list[dict] = [{"role": "system", "content": _SYSTEM_PROMPT}]

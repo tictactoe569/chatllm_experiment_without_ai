@@ -100,3 +100,9 @@ async function getSessionMessages(sessionId) {
 async function deleteSession(sessionId) {
   await apiFetch(`/api/sessions/${sessionId}`, { method: "DELETE" });
 }
+
+//NOVO
+async function updateSysPrompt(newSysPrompt) {
+  console.log("[API.js] cheguei aqui | newSysPrompt: ", newSysPrompt)
+  await apiFetch(`/api/chat/newSysPrompt/${newSysPrompt}`);
+}

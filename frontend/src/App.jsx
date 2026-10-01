@@ -245,6 +245,11 @@ function App() {
     return <Auth onAuthSuccess={onAuthSuccess} />;
   }
 
+  const handleUpdateSysPrompt = async(inputRef) => {
+    await updateSysPrompt(inputRef)
+    
+  }
+
   return (
     <div className="app-layout">
       <Sidebar
@@ -253,6 +258,7 @@ function App() {
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
         onDeleteSession={handleDeleteSession}
+        onUpdateSysPrompt={handleUpdateSysPrompt}
       />
 
       <main className="app-shell">

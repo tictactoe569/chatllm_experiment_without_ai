@@ -51,7 +51,7 @@ ou
    setup.bat run
    ```
    ou
-   ``` PowerShell
+   ``` PoswerShell
    .\setup.bat run   
    ```
 
