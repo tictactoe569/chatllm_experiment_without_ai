@@ -47,6 +47,7 @@ async def _generate_title(user_message: str, db: Session, session: ChatSession) 
             user_message=f'Generate a very short title (max 6 words) for a chat that starts with this message. Return ONLY the title, no quotes or extra text.\n\nMessage: "{user_message}"',
             history=[],
             model=None,
+            instructions=""
         )
         title = reply.strip().strip('"').strip("'").strip(".")[:60]
         if title:
@@ -85,6 +86,7 @@ async def chat(
             user_message=payload.message,
             history=[item.model_dump() for item in payload.history],
             model=payload.model,
+            instructions=payload.system_prompt
         )
     except OpenRouterConfigError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

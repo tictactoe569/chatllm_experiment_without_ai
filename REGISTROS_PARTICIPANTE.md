@@ -29,3 +29,20 @@ Caso utilize este espaço, organize o conteúdo da maneira que preferir.
 ---
 
 Registros
+
+
+1. Criar variável ou classe para armazenar as informações de systemprompt
+
+2. Descobrir como insere em um banco SQLite determinada informação (talvez precise criar uma nova tabela)
+3. Modificar a parte que faz o envio ao modelo do OpenRouter e colocar um systemprompt junto
+    (obs: o systemprompt atual deverá ser o padrão)
+
+4. Garantir persistência do systemprompt uma vez logado com aquele usuário
+
+==========
+
+1. Criei um novo atributo em ChatRequest que consegue armazenar o systemprompt para passar para a LLM!
+
+Agora eu preciso descobrir qual é o systemprompt original e associar a ele...
+
+Preciso descobrir qual é o systemprompt original

@@ -81,7 +81,7 @@ class TestGenerateReply:
         """Deve lancar OpenRouterConfigError quando nao ha API key."""
         with patch("backend.services.openrouter.OPENROUTER_API_KEY", ""):
             with pytest.raises(OpenRouterConfigError, match="OPENROUTER_API_KEY"):
-                await generate_reply(user_message="Teste", history=[])
+                await generate_reply(user_message="Teste", history=[],instructions="")
 
     @pytest.mark.asyncio
     async def test_generates_reply_success(self):
@@ -105,6 +105,7 @@ class TestGenerateReply:
                     user_message="Ola",
                     history=[],
                     model="test-model",
+                    instructions=""
                 )
                 assert reply == "Resposta mockada"
                 assert model == "test-model"
@@ -130,6 +131,7 @@ class TestGenerateReply:
                 reply, model = await generate_reply(
                     user_message="Ola",
                     history=[],
+                    instructions=""
                 )
                 assert model == "google/gemma-4-31b-it"
 
@@ -148,7 +150,7 @@ class TestGenerateReply:
         with patch("backend.services.openrouter.OPENROUTER_API_KEY", "sk-test"):
             with patch("httpx.AsyncClient", return_value=mock_client):
                 with pytest.raises(RuntimeError, match="OpenRouter retornou erro"):
-                    await generate_reply(user_message="Erro", history=[])
+                    await generate_reply(user_message="Erro", history=[],instructions="")
 
     @pytest.mark.asyncio
     async def test_raises_on_empty_reply(self):
@@ -169,7 +171,7 @@ class TestGenerateReply:
         with patch("backend.services.openrouter.OPENROUTER_API_KEY", "sk-test"):
             with patch("httpx.AsyncClient", return_value=mock_client):
                 with pytest.raises(RuntimeError, match="nao retornou conteudo"):
-                    await generate_reply(user_message="Teste", history=[])
+                    await generate_reply(user_message="Teste", history=[],instructions="")
 
 
 class TestStreamReply:

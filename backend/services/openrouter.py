@@ -41,7 +41,7 @@ def _build_headers() -> dict[str, str]:
     }
 
 
-async def generate_reply(*, user_message: str, history: list[dict], model: str | None = None) -> tuple[str, str]:
+async def generate_reply(*, user_message: str, history: list[dict], model: str | None = None, instructions : str) -> tuple[str, str]:
     if not OPENROUTER_API_KEY:
         raise OpenRouterConfigError(
             "OPENROUTER_API_KEY nao definido. Configure em .env ou environment variables."
@@ -53,6 +53,7 @@ async def generate_reply(*, user_message: str, history: list[dict], model: str |
     payload = {
         "model": resolved_model,
         "messages": messages,
+        "instructions" : instructions
     }
 
     async with httpx.AsyncClient(timeout=60.0) as client:
