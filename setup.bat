@@ -3,6 +3,9 @@ setlocal enabledelayedexpansion
 
 cd /d "%~dp0"
 
+set PWD=%~dp0
+echo %PWD%
+
 set "PYTHON_CMD="
 where py >nul 2>nul
 if %errorlevel%==0 (

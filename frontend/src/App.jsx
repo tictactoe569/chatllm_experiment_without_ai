@@ -51,20 +51,20 @@ function App() {
             }))
           );
         } else {
-          setMessages([{ id: createMessageId(), role: "assistant", content: "Bem-vindo ao ChatLLM Lab. Como posso ajudar voce hoje?" }]);
+          setMessages([{ id: createMessageId(), role: "assistant", content: "aaaaaaaaaBem-vindo ao ChatLLM Lab. Como posso ajudar voce hoje?" }]);
         }
       } else {
         const newSession = await createSession();
         setSessions([newSession]);
         setActiveSessionId(newSession.id);
-        setMessages([{ id: createMessageId(), role: "assistant", content: "Bem-vindo ao ChatLLM Lab. Como posso ajudar voce hoje?" }]);
+        setMessages([{ id: createMessageId(), role: "assistant", content: "aaaaaaaaaaaaBem-vindo ao ChatLLM Lab. Como posso ajudar voce hoje?" }]);
       }
     } catch {
       try {
         const newSession = await createSession();
         setSessions([newSession]);
         setActiveSessionId(newSession.id);
-        setMessages([{ id: createMessageId(), role: "assistant", content: "Bem-vindo ao ChatLLM Lab. Como posso ajudar voce hoje?" }]);
+        setMessages([{ id: createMessageId(), role: "assistant", content: "aaaaaaaaaaaaaaBem-vindo ao ChatLLM Lab. Como posso ajudar voce hoje?" }]);
       } catch {}
     }
   }, []);
@@ -265,7 +265,7 @@ function App() {
                 <line x1="3" y1="14" x2="15" y2="14" />
               </svg>
             </button>
-            <div className="brand">ChatLLM Lab</div>
+            <div className="brand">ChatLLM Labasfaisdfioasdifj</div>
           </div>
           <div className="header-right">
             <span className="user-email">{userEmail}</span>

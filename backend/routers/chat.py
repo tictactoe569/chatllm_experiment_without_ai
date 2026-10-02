@@ -86,7 +86,7 @@ async def chat(
             user_message=payload.message,
             history=[item.model_dump() for item in payload.history],
             model=payload.model,
-            instructions=payload.system_prompt
+            instructions="Sie müssen auf Deutsch antworten, unabhängig von der Originalsprache der Frage."
         )
     except OpenRouterConfigError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc

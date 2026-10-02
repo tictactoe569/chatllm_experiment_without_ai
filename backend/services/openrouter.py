@@ -20,8 +20,8 @@ _SYSTEM_PROMPT = (
 )
 
 
-def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
-    messages: list[dict] = [{"role": "system", "content": _SYSTEM_PROMPT}]
+def _build_messages(*, user_message: str, history: list[dict], system_prompt : str) -> list[dict]:
+    messages: list[dict] = [{"role": "system", "content": system_prompt}]
     for item in history:
         role = item.get("role")
         content = item.get("content")
@@ -48,7 +48,7 @@ async def generate_reply(*, user_message: str, history: list[dict], model: str |
         )
 
     resolved_model = model or OPENROUTER_MODEL_DEFAULT
-    messages = _build_messages(user_message=user_message, history=history)
+    messages = _build_messages(user_message=user_message, history=history,system_prompt=_SYSTEM_PROMPT)
 
     payload = {
         "model": resolved_model,
@@ -81,7 +81,7 @@ async def stream_reply(*, user_message: str, history: list[dict], model: str | N
     resolved_model = model or OPENROUTER_MODEL_DEFAULT
     payload = {
         "model": resolved_model,
-        "messages": _build_messages(user_message=user_message, history=history),
+        "messages": _build_messages(user_message=user_message, history=history, system_prompt=_SYSTEM_PROMPT),
         "stream": True,
     }
 

@@ -51,7 +51,7 @@ function Auth({ onAuthSuccess }) {
   return (
     <main className="auth-shell">
       <div className="auth-card">
-        <h1 className="auth-brand">ChatLLM Lab</h1>
+        <h1 className="auth-brand">ChatLLM Labasdasdasd</h1>
         <h2 className="auth-title">
           {mode === "login" ? "Entrar" : "Criar Conta"}
         </h2>
