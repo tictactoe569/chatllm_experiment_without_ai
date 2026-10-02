@@ -4,11 +4,13 @@ import json
 
 import httpx
 
+from backend.auth import get_current_user
 from backend.config import OPENROUTER_API_KEY, OPENROUTER_API_URL, OPENROUTER_MODEL_DEFAULT
 
 
 class OpenRouterConfigError(RuntimeError):
     pass
+
 
 
 _SYSTEM_PROMPT = (
@@ -19,9 +21,23 @@ _SYSTEM_PROMPT = (
     "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
 )
 
+def system_prompt (user_prompt=True, user_message_prompt, current_user: get_current_user):
+    _SYSTEM_PROMPT = (
+    "Keep your answers short and concise. "
+    "When writing mathematical expressions, use LaTeX notation: "
+    r"\( ... \) for inline math and $$ ... $$ for display/block math. "
+    "When writing currency values (e.g. dollar amounts), always escape the dollar sign as the HTML entity &#36; "
+    "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
+)
+
+    if user_message_prompt:
+        _SYSTEM_PROMPT += user_message_prompt
+        
+
+    return _SYSTEM_PROMPT
 
 def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
-    messages: list[dict] = [{"role": "system", "content": _SYSTEM_PROMPT}]
+    messages: list[dict] = [{"role": "system", "content": system_prompt()}]
     for item in history:
         role = item.get("role")
         content = item.get("content")
@@ -29,6 +45,12 @@ def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
             messages.append({"role": role, "content": content.strip()})
 
     messages.append({"role": "user", "content": user_message.strip()})
+
+    print(messages)
+
+    if user_message == "quero mudar minhas custom instructions":
+        system_prompt()
+
     return messages
 
 
@@ -72,6 +94,7 @@ async def generate_reply(*, user_message: str, history: list[dict], model: str |
 
 
 async def stream_reply(*, user_message: str, history: list[dict], model: str | None = None):
+    print("entrei no stream_reply")
     if not OPENROUTER_API_KEY:
         raise OpenRouterConfigError(
             "OPENROUTER_API_KEY nao definido. Configure em .env ou environment variables."
