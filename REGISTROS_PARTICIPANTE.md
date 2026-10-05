@@ -18,14 +18,15 @@ Modifiquei o openrouter.py para que se o usuario tivesse um prompt, ele usario, 
 
 - observações;
 Eu imagino que se precisse mudar algo do banco de dados, lembro-me que usar bancos já existentes pode fazer ele dar erro, pois eu adicionei uma coluna a mais, então precisa haver algum tipo de tratamento
+Eu precisso de alguma fomra fazer o usuario preencher esse prompt, mas não faço a minima ideia como farei isso;
 
 - lembretes;
 
 - listas ou checklists;
-Adicionar um campo na tabela do usuario, para seu prompt;
-Atualizar o banco de dados;
-Provalvemente mexer no endpoint das rotas;
-Atualizar o openrouter.py para receber o prompt do usario e caso não ele não tenha, então vai receber um prompt padrão do sistemas;
+Adicionar um campo na tabela do usuario, para seu prompt; Feito;
+Atualizar o banco de dados; Não feito;
+Provalvemente mexer no endpoint das rotas; Naõ sei;
+Atualizar o openrouter.py para receber o prompt do usario e caso não ele não tenha, então vai receber um prompt padrão do sistemas; Feito;
 
 - referências;
 

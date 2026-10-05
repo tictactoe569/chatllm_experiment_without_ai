@@ -56,7 +56,9 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
         )
 
     access_token, _ = create_access_token(user.email, user.id)
-    return AuthResponse(access_token=access_token, email=user.email)
+
+    prompt = User.prompt_user
+    return AuthResponse(access_token=access_token, email=user.email,prompt=prompt)
 
 
 @router.post("/logout", response_model=MessageResponse)
