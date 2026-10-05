@@ -17,6 +17,7 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None)
     )
+    prompt_user: Mapped[str] = mapped_column(String(255), unique=False)
 
 
 class TokenBlacklist(Base):

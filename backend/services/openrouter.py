@@ -5,20 +5,24 @@ import json
 import httpx
 
 from backend.config import OPENROUTER_API_KEY, OPENROUTER_API_URL, OPENROUTER_MODEL_DEFAULT
+from backend.models import User
 
 
 class OpenRouterConfigError(RuntimeError):
     pass
 
 
-_SYSTEM_PROMPT = (
+
+if User.prompt_user == "":
+    _SYSTEM_PROMPT = (User.prompt_user)
+else:
+    _SYSTEM_PROMPT = (
     "Keep your answers short and concise. "
     "When writing mathematical expressions, use LaTeX notation: "
     r"\( ... \) for inline math and $$ ... $$ for display/block math. "
     "When writing currency values (e.g. dollar amounts), always escape the dollar sign as the HTML entity &#36; "
     "(e.g. write &#36;5.00 instead of $5.00) so it is never confused with a LaTeX delimiter."
 )
-
 
 def _build_messages(*, user_message: str, history: list[dict]) -> list[dict]:
     messages: list[dict] = [{"role": "system", "content": _SYSTEM_PROMPT}]
