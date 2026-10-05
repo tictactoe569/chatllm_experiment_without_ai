@@ -1,6 +1,6 @@
 const { useEffect, useState } = React;
 
-function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession }) {
+function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onDeleteSession, confPrompt }) {
   return (
     <aside className="sidebar">
       <div className="sidebar-header">
@@ -11,7 +11,7 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
           </svg>
           Novo chat
         </button>
-        <button className="new-chat-btn" onClick={onNewSession}>
+        <button className="new-chat-btn" onClick={confPrompt}>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <line x1="8" y1="2" x2="8" y2="14" />
             <line x1="2" y1="8" x2="14" y2="8" />
