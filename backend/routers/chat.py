@@ -37,7 +37,7 @@ def _ensure_session(session_id: int | None, current_user: User, db: Session) -> 
     return session
 
 
-async def _generate_title(user_message: str, db: Session, session: ChatSession) -> str | None:
+async def _generate_title(user_message: str, db: Session, session: ChatSession, user_system_prompt: str | None = None) -> str | None:
     """Generate an automatic title based on the first user message.
 
     Tries OpenRouter first; falls back to first words of the message.
@@ -47,6 +47,7 @@ async def _generate_title(user_message: str, db: Session, session: ChatSession) 
             user_message=f'Generate a very short title (max 6 words) for a chat that starts with this message. Return ONLY the title, no quotes or extra text.\n\nMessage: "{user_message}"',
             history=[],
             model=None,
+            user_system_prompt=user_system_prompt
         )
         title = reply.strip().strip('"').strip("'").strip(".")[:60]
         if title:
@@ -75,6 +76,7 @@ async def chat(
     payload: ChatRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    user_system_prompt: str | None = None
 ) -> ChatResponse:
     session = _ensure_session(payload.session_id, current_user, db)
     session_id = session.id
@@ -85,6 +87,7 @@ async def chat(
             user_message=payload.message,
             history=[item.model_dump() for item in payload.history],
             model=payload.model,
+            user_system_prompt=user_system_prompt
         )
     except OpenRouterConfigError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
@@ -93,8 +96,8 @@ async def chat(
 
     resolved_model = payload.model or model_name or OPENROUTER_MODEL_DEFAULT
 
-    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="user", content=payload.message, model=resolved_model))
-    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="assistant", content=reply, model=resolved_model))
+    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="user", content=payload.message, model=resolved_model, system_prompt=user_system_prompt))
+    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="assistant", content=reply, model=resolved_model, system_prompt=user_system_prompt))
 
     # Auto-title on first message
     if session.title == "Novo chat" or not session.title:
@@ -111,6 +114,7 @@ async def chat_stream(
     payload: ChatRequest,
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    user_system_prompt: str | None = None
 ) -> StreamingResponse:
     session = _ensure_session(payload.session_id, current_user, db)
     session_id = session.id
@@ -120,7 +124,7 @@ async def chat_stream(
     is_first_message = session.title == "Novo chat" or not session.title
 
     # Save user message immediately
-    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="user", content=payload.message, model=resolved_model))
+    db.add(ChatMessage(session_id=session_id, user_id=current_user_id, role="user", content=payload.message, model=resolved_model, system_prompt=user_system_prompt))
 
     # Generate auto-title before streaming so it's persisted even if client disconnects
     if is_first_message:
@@ -137,6 +141,7 @@ async def chat_stream(
                 user_message=payload.message,
                 history=[item.model_dump() for item in payload.history],
                 model=payload.model,
+                user_system_prompt=user_system_prompt
             ):
                 full_reply += delta
                 yield f"data: {json.dumps({'delta': delta}, ensure_ascii=True)}\n\n"
@@ -155,6 +160,7 @@ async def chat_stream(
                     role="assistant",
                     content=full_reply,
                     model=resolved_model,
+                    system_prompt=user_system_prompt
                 )
             )
             db.commit()

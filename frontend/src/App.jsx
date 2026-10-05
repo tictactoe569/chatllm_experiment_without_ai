@@ -180,6 +180,7 @@ function App() {
       const result = await sendMessageStream({
         message: cleaned,
         history: chatHistory,
+        system_prompt: "OLA",
         session_id: activeSessionId,
         signal: abortController.signal,
         onDelta: (delta) => {
@@ -272,7 +273,7 @@ function App() {
             <button className="logout-btn" onClick={handleLogout}>Sair</button>
           </div>
         </header>
-
+        
         <section className="messages" aria-live="polite" ref={messagesRef}>
           <div className="messages-inner">
             {messages.map((msg) => (

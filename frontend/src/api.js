@@ -18,11 +18,11 @@ async function apiFetch(url, options = {}) {
   return response;
 }
 
-async function sendMessageStream({ message, history, session_id, onDelta, signal }) {
+async function sendMessageStream({ message, history, session_id, system_prompt, onDelta, signal }) {
   const response = await fetch(`${API_BASE}/api/chat/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json", ...getAuthHeaders() },
-    body: JSON.stringify({ message, history, session_id }),
+    body: JSON.stringify({ message, history, session_id, system_prompt }),
     signal,
   });
 
