@@ -27,6 +27,7 @@ Adicionar um campo na tabela do usuario, para seu prompt; Feito;
 Atualizar o banco de dados; Não feito;
 Provalvemente mexer no endpoint das rotas; Naõ sei;
 Atualizar o openrouter.py para receber o prompt do usario e caso não ele não tenha, então vai receber um prompt padrão do sistemas; Feito;
+Mexer no fronttend, não tenho a minima ideia como farei isso;
 
 - referências;
 
