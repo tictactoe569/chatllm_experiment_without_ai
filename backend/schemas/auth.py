@@ -17,7 +17,7 @@ class AuthResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     email: str
-
+    custom_instuction: str
 
 class LogoutRequest(BaseModel):
     refresh_token: str | None = None
@@ -25,3 +25,7 @@ class LogoutRequest(BaseModel):
 
 class MessageResponse(BaseModel):
     detail: str
+
+
+class CustomInstruction(BaseModel):
+    custom_instruction = str

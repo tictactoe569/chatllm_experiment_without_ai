@@ -7,6 +7,7 @@ function createMessageId() {
 function App() {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
   const [userEmail, setUserEmail] = useState(localStorage.getItem("user_email") || "");
+  const [userCustomInstruction,setUserCustomInstruction] = useState(localStorage.getItem("user_custom_instruction") || "");
   const [sessions, setSessions] = useState([]);
   const [activeSessionId, setActiveSessionId] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -110,6 +111,10 @@ function App() {
     } catch (err) {
       setError("Erro ao criar sessao");
     }
+  };
+
+  const setCustomInstruction = async (session_id, custom_instruction) => {
+    setUserCustomInstruction(custom_instruction);
   };
 
   const handleDeleteSession = async (sessionId) => {
@@ -252,6 +257,7 @@ function App() {
         activeSessionId={activeSessionId}
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
+        onCustomExpression={setCustomInstruction}
         onDeleteSession={handleDeleteSession}
       />
 

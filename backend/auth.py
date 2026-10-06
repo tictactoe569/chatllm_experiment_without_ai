@@ -52,6 +52,32 @@ def decode_access_token(token: str) -> dict:
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+def get_custom_instruction( # a ideia seria que a entidade user tivesse o atributo custom_instruction com default value = NULL
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+    db: Session = Depends(get_db),
+) -> User:
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Autenticacao necessaria",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    payload = decode_access_token(credentials.credentials)
+    return custom_instruction
+
+def set_custom_instruction( # a ideia seria que a entidade user tivesse o atributo custom_instruction com default value = NULL
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
+    db: Session = Depends(get_db),
+    custom_instruction = str
+) -> User:
+    if credentials is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Autenticacao necessaria",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    db.query(User).get_column("custom_innstruction") = custom_instruction
+    
 
 def get_current_user(
     credentials: HTTPAuthorizationCredentials | None = Depends(security),

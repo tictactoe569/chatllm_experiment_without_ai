@@ -18,6 +18,15 @@ documentação própria da solução;
 
 - listas ou checklists;
 
+adcionar ao modelo User, o atributo custom_instruction
+criar métodos para get e set do custom_instruction
+adicionar no auth schema CustomInstruction
+criar rota
+criar componente modal (dialogo com form para custom instruction)
+criar botão que acione o modal
+
+
+
 - referências;
 
 qualquer outro registro que você considere útil durante a implementação.

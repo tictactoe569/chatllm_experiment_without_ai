@@ -20,6 +20,7 @@ from backend.schemas.auth import (
     LogoutRequest,
     MessageResponse,
     SignupRequest,
+    CustomInstruction
 )
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
@@ -84,4 +85,12 @@ def logout(
 
 @router.get("/me", response_model=AuthResponse)
 def me(current_user: User = Depends(get_current_user)):
-    return AuthResponse(access_token="", email=current_user.email)
+    return AuthResponse(access_token="", custom_instuction="", email=current_user.email)
+
+@router.post("/me/set/customInstruction", response_model=CustomInstruction)
+def me(current_user: User = Depends(get_current_user)):
+    return AuthResponse(access_token="", custom_instuction=CustomInstruction.custom_instruction, email=current_user.email)
+
+@router.post("/me/get/customInstruction", response_model=CustomInstruction)
+def me(current_user: User = Depends(get_current_user)):
+    return get_current_user().custom_instruction

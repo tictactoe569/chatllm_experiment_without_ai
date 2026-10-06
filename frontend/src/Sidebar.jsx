@@ -11,6 +11,9 @@ function Sidebar({ sessions, activeSessionId, onSelectSession, onNewSession, onD
           </svg>
           Novo chat
         </button>
+        <button className="custom-btn">
+          Custom Instructions
+        </button>
       </div>
       <div className="sidebar-list">
         {sessions.map((s) => (
